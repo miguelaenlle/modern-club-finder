@@ -9,6 +9,7 @@ const CenterBox = () => {
   const [password, setPassword] = useState("");
   const [showWarning, setShowWarning] = useState(false);
   const [showEmptyFieldsError, setShowEmptyFieldsError] = useState(false);
+  const [showBackendError, setShowBackendError] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -23,9 +24,15 @@ const CenterBox = () => {
   };
 
   const handleLoginClick = () => {
+    setShowEmptyFieldsError(false);
+    setShowBackendError(false);
     if (!email || !password) {
       setShowEmptyFieldsError(true);
-    }
+      return;
+    } 
+
+    
+
   };
 
   return (
@@ -69,6 +76,9 @@ const CenterBox = () => {
       {showWarning && <h1 className="text-error-red font-bold">ERROR: Spaces not allowed </h1>}
       {showEmptyFieldsError && (
         <h1 className="text-error-red font-bold">ERROR: Please fill in both fields</h1>
+      )}
+      {showBackendError && (
+        <h1 className="text-error-red font-bold">A server error occured, please refresh.</h1>
       )}
 
       
